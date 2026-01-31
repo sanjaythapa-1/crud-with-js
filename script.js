@@ -9,20 +9,20 @@ function handleData() {
     document.getElementById("msg").innerHTML = "Please insert the data"; //Shows the message
   } else {
     if (id == "no") {
-      let arr = JSON.parse(localStorage.getItem("crud"));
+      let arr = getCrudData();
       // console.log(arr); shows null value
       if (!arr) {
         let data = [name];
-        localStorage.setItem("crud", JSON.stringify(data));
+        setCrudData(data);
       } else {
         arr.push(name);
-        localStorage.setItem("crud", JSON.stringify(arr));
+        setCrudData(arr);
       }
       document.getElementById("msg").innerHTML = "Data inserted";
     } else {
-      let arr = JSON.parse(localStorage.getItem("crud"));
+      let arr = getCrudData();
       arr[id] = name;
-      localStorage.setItem("crud", JSON.stringify(arr));
+      setCrudData(arr);
       document.getElementById("msg").innerHTML = "Data updated";
     }
     document.getElementById("name").value = "";
@@ -44,14 +44,22 @@ function fetchData() {
 }
 
 function deleteData(recordData) {
-  let arr = JSON.parse(localStorage.getItem("crud"));
+  let arr = getCrudData();
   arr.splice(recordData, 1); //used to remove data from the index
-  localStorage.setItem("crud", JSON.stringify(arr));
+  setCrudData(arr);
   fetchData();
 }
 
 function editData(recordData) {
   id = recordData;
-  let arr = JSON.parse(localStorage.getItem("crud"));
+  let arr = getCrudData();
   document.getElementById("name").value = arr[recordData];
+}
+
+function getCrudData() {
+  let arr = JSON.parse(localStorage.getItem("crud"));
+  return arr;
+}
+function setCrudData(arr) {
+  localStorage.setItem("crud", JSON.stringify(arr));
 }
