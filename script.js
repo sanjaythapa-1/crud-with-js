@@ -1,5 +1,5 @@
 let id = "";
-localStorage.clear();
+// localStorage.clear();
 fetchData();
 
 function handleData() {
@@ -31,12 +31,17 @@ function fetchData() {
     let html = "";
     let sno = 1;
     for (let i in arr) {
-      html += `<tr><td>${sno}</td><td>${arr[i]}</td></tr>`;
+      html += `<tr><td>${sno}</td><td>${arr[i]}</td><td><a href ="javascript:void(0)" onclick ="deleteData(${i})">Delete</a></td></tr>`; //javascript:void(0) prevents reload in page
     }
     document.getElementById("user").innerHTML = html;
   }
 }
 
-function deleteData() {}
+function deleteData(recordData) {
+  let arr = JSON.parse(localStorage.getItem("crud"));
+  arr.splice(recordData, 1); //used to remove data from the index
+  localStorage.setItem("crud", JSON.stringify(arr));
+  fetchData();
+}
 
 function editData() {}
