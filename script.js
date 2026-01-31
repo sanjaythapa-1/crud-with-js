@@ -1,5 +1,5 @@
 let id = "no";
-// localStorage.clear();
+localStorage.clear();
 fetchData();
 
 function handleData() {
