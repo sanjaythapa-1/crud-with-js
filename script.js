@@ -1,5 +1,6 @@
 let id = "";
-// localStorage.clear();
+localStorage.clear();
+fetchData();
 
 function handleData() {
   document.getElementById("msg").innerHTML = "";
@@ -20,10 +21,21 @@ function handleData() {
       document.getElementById("msg").innerHTML = "Data inserted";
     } else {
     }
+    fetchData();
   }
 }
 
-function fetchData() {}
+function fetchData() {
+  let arr = JSON.parse(localStorage.getItem("crud"));
+  if (arr) {
+    let html = "";
+    let sno = 1;
+    for (let i in arr) {
+      html += `<tr><td>${sno}</td><td>${arr[i]}</td></tr>`;
+    }
+    document.getElementById("user").innerHTML = html;
+  }
+}
 
 function deleteData() {}
 
